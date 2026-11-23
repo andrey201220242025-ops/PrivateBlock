@@ -1,0 +1,18 @@
+name: PrivateBlocks
+version: 2.0.0
+main: ru.example.privateblocks.PrivateBlocksPlugin
+api-version: '26.2'
+description: Приваты через WorldGuard + кастомный динамит
+depend: [WorldGuard]
+commands:
+  dynamite:
+    description: Выдача динамита
+    aliases: [dyn]
+    usage: /dynamite give [ник] [A-F] [кол-во]
+permissions:
+  privateblocks.admin:
+    description: Выдача динамита
+    default: op
+  privateblocks.bypass:
+    description: Ломать чужие приватные блоки и ставить приват поверх чужих регионов
+    default: op

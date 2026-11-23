@@ -1,0 +1,101 @@
+# ===== PrivateBlocks (WorldGuard) =====
+# Приватом становится ОБЫЧНЫЙ блок из этого списка. Регион создаётся через WorldGuard
+# (дальше всё через /rg: info, addmember, flag и т.д.).
+# size = сторона куба, hits = сколько "ударов" выдерживает (1 = ломается любым взрывом рядом)
+private-blocks:
+  COPPER_BLOCK:    { size: 3,  hits: 1 }
+  GOLD_BLOCK:      { size: 5,  hits: 1 }
+  IRON_BLOCK:      { size: 8,  hits: 1 }
+  DIAMOND_BLOCK:   { size: 12, hits: 1 }
+  EMERALD_BLOCK:   { size: 17, hits: 1 }
+  NETHERITE_BLOCK: { size: 30, hits: 4 }   # выдерживает 4 взрыва обычного ТНТ
+
+disabled-worlds: []
+
+# Флаги, которые ставятся на каждый созданный регион (имя флага WorldGuard: allow/deny)
+region-flags:
+  pistons: allow
+  water-flow: allow
+  lava-flow: allow
+
+# Мощность обычного ТНТ. Урон по приватному блоку = мощность_взрыва / это число
+# (ТНТ = 1 удар, динамит A = 5 ударов, B = 10 и т.д.). Взрыв считается "попавшим", если
+# приватный блок находится ближе, чем мощность взрыва (стены не учитываются).
+vanilla-tnt-power: 4.0
+
+# Пока приватный блок цел, остальные блоки региона взрывами не ломаются
+protect-region-from-explosions: true
+max-explosion-blocks: 30000
+obsidian-resistance: 6.0     # сопротивление обсидиана для динамита C и D
+
+# mode: NORMAL | SPAWNER | BEDROCK
+dynamites:
+  A:
+    name: "<red><bold>Динамит A"
+    power-multiplier: 5
+    underwater: false
+    breaks-obsidian: false
+    mode: NORMAL
+    lore:
+      - "<gray>Взрыв в <white>5 раз <gray>сильнее обычного ТНТ"
+      - "<gray>Под водой не взрывается"
+  B:
+    name: "<red><bold>Динамит B"
+    power-multiplier: 10
+    underwater: true
+    breaks-obsidian: false
+    mode: NORMAL
+    lore:
+      - "<gray>Взрыв в <white>10 раз <gray>сильнее обычного ТНТ"
+      - "<gray>Работает под водой"
+  C:
+    name: "<gold><bold>Динамит C"
+    power-multiplier: 1
+    underwater: false
+    breaks-obsidian: true
+    mode: NORMAL
+    lore:
+      - "<gray>Мощность как у обычного ТНТ"
+      - "<gray>Ломает <white>обсидиан"
+      - "<gray>Под водой не взрывается"
+  D:
+    name: "<gold><bold>Динамит D"
+    power-multiplier: 2
+    underwater: true
+    breaks-obsidian: true
+    mode: NORMAL
+    lore:
+      - "<gray>Взрыв в <white>2 раза <gray>сильнее обычного ТНТ"
+      - "<gray>Ломает <white>обсидиан"
+      - "<gray>Работает под водой"
+  E:
+    name: "<green><bold>Динамит E"
+    power-multiplier: 1
+    underwater: true
+    breaks-obsidian: false
+    mode: SPAWNER
+    area-radius: 1          # 1 = область 3x3x3
+    lore:
+      - "<gray>Область взрыва <white>3x3x3"
+      - "<gray>Ломает <white>только спавнеры"
+      - "<gray>Моб в спавнере <white>сохраняется <gray>при выпадении"
+  F:
+    name: "<dark_purple><bold>Динамит F"
+    power-multiplier: 1
+    underwater: true
+    breaks-obsidian: false
+    mode: BEDROCK
+    lore:
+      - "<gray>Ломает <white>один блок бедрока"
+      - "<gray>Больше ничего не разрушает"
+
+messages:
+  prefix: "<dark_gray>[<aqua>Приват<dark_gray>] <gray>"
+  private-created: "<green>Приват создан: <white>{size}x{size}x{size}<green>. Управление через <white>/rg"
+  private-overlap: "<red>Здесь нельзя: рядом чужой регион."
+  not-owner: "<red>Сломать приватный блок может только владелец региона."
+  private-removed: "<yellow>Приват удалён."
+  usage: "<red>Использование: <white>{usage}"
+  player-not-found: "<red>Игрок не найден."
+  unknown-dynamite: "<red>Неизвестный динамит (доступны: {list})."
+  given: "<green>Выдано <white>{amount}<green> шт. <white>{name}<green> игроку <white>{player}"
